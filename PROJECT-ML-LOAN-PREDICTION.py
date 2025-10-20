@@ -76,7 +76,22 @@ plot_tree(model,
           rounded=True,
           fontsize=8)
 plt.show()
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
 
+# Compute the confusion matrix
+cm = confusion_matrix(y_test, y_pred)
+
+# Create a ConfusionMatrixDisplay object
+# Use the inverse_transform on a dummy array to get original class names
+display_labels = le_loan_status.inverse_transform([0, 1])
+cmd = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=display_labels)
+
+# Plot the confusion matrix
+fig, ax = plt.subplots(figsize=(6, 6))
+cmd.plot(ax=ax)
+plt.title("Confusion Matrix")
+plt.show()
 # -------------------------------
 # Function to predict loan status
 # -------------------------------
