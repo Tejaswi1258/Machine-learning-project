@@ -64,6 +64,18 @@ model.fit(X_train_scaled, y_train)
 y_pred = model.predict(X_test_scaled)
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Model Accuracy: {accuracy:.2f}")
+from sklearn.tree import plot_tree
+import matplotlib.pyplot as plt
+
+# Visualize the Decision Tree
+plt.figure(figsize=(20, 10))  # Adjust figure size as needed
+plot_tree(model,
+          feature_names=X_train.columns.tolist(),
+          class_names=le_loan_status.inverse_transform([0, 1]).tolist(),
+          filled=True,
+          rounded=True,
+          fontsize=8)
+plt.show()
 
 # -------------------------------
 # Function to predict loan status
